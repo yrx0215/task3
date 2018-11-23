@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jnshu.clroom.mapper.UserGusetbootMapper" >
+  <resultMap id="BaseResultMap" type="com.jnshu.clroom.beans.UserGusetboot" >
+    <constructor >
+      <idArg column="Id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="guestbook" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="painting" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="banner" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="studio" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="track" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, guestbook, painting, banner, studio, track
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_gusetbook
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_gusetbook
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jnshu.clroom.beans.UserGusetboot" >
+    insert into user_gusetbook (Id, guestbook, painting, 
+      banner, studio, track
+      )
+    values (#{id,jdbcType=INTEGER}, #{guestbook,jdbcType=VARCHAR}, #{painting,jdbcType=VARCHAR}, 
+      #{banner,jdbcType=VARCHAR}, #{studio,jdbcType=VARCHAR}, #{track,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jnshu.clroom.beans.UserGusetboot" >
+    insert into user_gusetbook
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="guestbook != null" >
+        guestbook,
+      </if>
+      <if test="painting != null" >
+        painting,
+      </if>
+      <if test="banner != null" >
+        banner,
+      </if>
+      <if test="studio != null" >
+        studio,
+      </if>
+      <if test="track != null" >
+        track,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="guestbook != null" >
+        #{guestbook,jdbcType=VARCHAR},
+      </if>
+      <if test="painting != null" >
+        #{painting,jdbcType=VARCHAR},
+      </if>
+      <if test="banner != null" >
+        #{banner,jdbcType=VARCHAR},
+      </if>
+      <if test="studio != null" >
+        #{studio,jdbcType=VARCHAR},
+      </if>
+      <if test="track != null" >
+        #{track,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jnshu.clroom.beans.UserGusetboot" >
+    update user_gusetbook
+    <set >
+      <if test="guestbook != null" >
+        guestbook = #{guestbook,jdbcType=VARCHAR},
+      </if>
+      <if test="painting != null" >
+        painting = #{painting,jdbcType=VARCHAR},
+      </if>
+      <if test="banner != null" >
+        banner = #{banner,jdbcType=VARCHAR},
+      </if>
+      <if test="studio != null" >
+        studio = #{studio,jdbcType=VARCHAR},
+      </if>
+      <if test="track != null" >
+        track = #{track,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jnshu.clroom.beans.UserGusetboot" >
+    update user_gusetbook
+    set guestbook = #{guestbook,jdbcType=VARCHAR},
+      painting = #{painting,jdbcType=VARCHAR},
+      banner = #{banner,jdbcType=VARCHAR},
+      studio = #{studio,jdbcType=VARCHAR},
+      track = #{track,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
