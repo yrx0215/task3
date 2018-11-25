@@ -50,6 +50,12 @@ public class UserController {
         return "redirect:/users";
     }
 
+
+    /**
+     * 查询所有员工方法,
+     * @param model 将user放入到model域中
+     * @return 返回users.jsp对象
+     */
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String selectAllUser(Model model){
         List<User> userList = userService.selectAllUser();
@@ -68,6 +74,15 @@ public class UserController {
         return "users";
     }
 
+    /**
+     * 更新user方法
+     * @param userId user对应的id
+     * @param map 放到map中
+     * @param userName 更新的参数userName
+     * @param password 更新的参数passwo
+     * @param userRole 更新的参数userRole
+     * @return 重定向到usrs.jsp文件中
+     */
     @RequestMapping(value = "/user/{userId}", method = RequestMethod.PUT)
     public String updateUserPasswordById(@PathVariable("userId") Integer userId, Map map, @RequestParam String userName, @RequestParam String password, @RequestParam String userRole){
         User user = new User();
@@ -90,6 +105,12 @@ public class UserController {
     }
 
 
+    /**
+     * 通过userId删除user方法
+     * @param userId 删除user的id值
+     * @param model 将信息放到model域中
+     * @return 重定向到users,jsp视图中
+     */
     @RequestMapping(value = "/user/{userId}",method = RequestMethod.DELETE)
     public String delectUserById(@PathVariable("userId") Integer userId,Model model){
         Boolean flag = userService.delectUserById(userId);
@@ -105,11 +126,22 @@ public class UserController {
         return "redirect:/users";
     }
 
+    /**
+     *  跳转到添加user页面
+     * @return 返回到addUser.jsp 视图页面中
+     */
     @RequestMapping(value = "/user",method = RequestMethod.GET)
     public String toAddPage() {
         return "addUser";
     }
 
+    /**
+     * 跳转到更新用户页面,同时携带更新user的数据;
+     * @param userId 需要更新的userId
+     * @param model 将user数据存放到model域中
+     * @return 返回到addUser,jsp页面,页面中进行判断是否为更新操作;
+     *
+     */
     @RequestMapping(value = "/user/{userId}",method = RequestMethod.GET)
     public String toUpdatePage(@PathVariable("userId") Integer userId,  Model model) {
         User user = userService.selectUserById(userId);
